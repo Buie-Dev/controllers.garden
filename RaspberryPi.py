@@ -51,6 +51,7 @@ class RaspberryPi:
         pin_number = self.pin_numbers[zone - 1]
 
         if config.IS_RASPBERRYPI:
+            print(f"SETTING ZONE {zone}: GPIO {pin_number} TO {state}")
             GPIO.output(pin_number, state)
         else:
             print(f"SETTING ZONE {zone}: GPIO {pin_number} TO {state}")
