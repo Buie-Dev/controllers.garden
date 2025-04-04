@@ -9,7 +9,7 @@ except (ImportError, RuntimeError):
 
 
 class RaspberryPi:
-    pin_numbers = [14, 15, 18, 23, 24, 25, 8, 7, 2, 3, 4, 17]
+    pin_numbers = [3, 17, 18, 9, 0, 6, 2, 4, 27, 10, 11, 5]
 
     def __init__(self):
         if config.IS_RASPBERRYPI:
