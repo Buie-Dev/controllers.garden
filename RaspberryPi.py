@@ -48,6 +48,9 @@ class RaspberryPi:
             print(f"TURNING OFF ZONE {zone}: GPIO {pin_number}")
 
     def set_relays(self, zone, state):
+        if zone > 7:
+            print("Zone Out OF Range")
+            return
         pin_number = self.pin_numbers[zone - 1]
 
         if config.IS_RASPBERRYPI:
