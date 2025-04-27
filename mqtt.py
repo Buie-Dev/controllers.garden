@@ -14,7 +14,7 @@ TOPIC_PUB_HEALTH_CHECK_RESPONSE = "healthcheck/response"  # Topic to publish to
 
 sub_topics = [TOPIC_SUB_HEALTH_CHECK_REQUEST, TOPIC_SUB_CURRENT_STATE]
 rp = RaspberryPi()
-total_zones = 12
+total_zones = 7
 
 
 # Callback when the client connects to the broker
@@ -51,7 +51,7 @@ def on_message(client, userdata, msg):
 
             # Turn off missing zones
             existing_ids = {zone["id"] for zone in subzones}
-            missing_ids = [i for i in range(1, 13) if i not in existing_ids]
+            missing_ids = [i for i in range(1, 8) if i not in existing_ids]
 
             for id in missing_ids:
                 rp.set_relays(id, 0)

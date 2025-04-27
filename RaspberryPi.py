@@ -9,7 +9,7 @@ except (ImportError, RuntimeError):
 
 
 class RaspberryPi:
-    pin_numbers = [3, 17, 18, 9, 0, 6, 2, 4, 27, 10, 11, 5]
+    pin_numbers = [2, 3, 4, 17, 27, 18, 10]
 
     def __init__(self):
         if config.IS_RASPBERRYPI:
@@ -52,6 +52,7 @@ class RaspberryPi:
 
         if config.IS_RASPBERRYPI:
             print(f"SETTING ZONE {zone}: GPIO {pin_number} TO {state}")
-            GPIO.output(pin_number, state)
+            gpio_state = GPIO.HIGH if state == 0 else GPIO.LOW
+            GPIO.output(pin_number, gpio_state)
         else:
             print(f"SETTING ZONE {zone}: GPIO {pin_number} TO {state}")
