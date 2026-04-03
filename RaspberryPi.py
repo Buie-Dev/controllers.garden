@@ -47,14 +47,6 @@ class RaspberryPi:
 
         try:
             GPIO.output(pin, state)
-            # Verify the pin was set correctly
-            time.sleep(0.002)
-            actual_state = GPIO.input(pin)
-            if actual_state != state:
-                print(
-                    f"Warning: Pin {pin} state mismatch. Expected: {state}, Got: {actual_state}"
-                )
-                return False
             return True
         except Exception as e:
             print(f"Error setting GPIO pin {pin} to {state}: {e}")
