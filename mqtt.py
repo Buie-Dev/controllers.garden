@@ -70,12 +70,14 @@ def check_gpio_health():
             pin_status = rp.get_pin_status()
             print(f"Current GPIO status: {pin_status}")
 
-            # If we haven't had activity in a while, do a preventive reset
-            if time_since_activity > 600:  # 10 minutes
-                print(
-                    "No GPIO activity for 10+ minutes, performing preventive reset..."
-                )
-                rp._reset_gpio()
+            # Commented out: this was resetting all relays after 10 min of no messages
+            # but main controller only sends on state change, so long timers (hours)
+            # would always get killed mid-run
+            # if time_since_activity > 600:  # 10 minutes
+            #     print(
+            #         "No GPIO activity for 10+ minutes, performing preventive reset..."
+            #     )
+            #     rp._reset_gpio()
 
         except Exception as e:
             print(f"Error during GPIO health check: {e}")
@@ -136,12 +138,13 @@ def on_message(client, userdata, msg):
         print(f"Received non-JSON message: {msg.payload.decode()} on topic {msg.topic}")
     except Exception as e:
         print(f"Error processing message: {e}")
-        # If we get a general error, try to reset GPIO
-        try:
-            print("Attempting GPIO reset due to error...")
-            rp._reset_gpio()
-        except Exception as reset_error:
-            print(f"Failed to reset GPIO: {reset_error}")
+        # Commented out: resetting all relays on any message error was too aggressive
+        # and could kill active irrigation runs unexpectedly
+        # try:
+        #     print("Attempting GPIO reset due to error...")
+        #     rp._reset_gpio()
+        # except Exception as reset_error:
+        #     print(f"Failed to reset GPIO: {reset_error}")
 
 
 def create_mqtt_client():
