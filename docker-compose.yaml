@@ -2,7 +2,9 @@
 
 services:
   garden-controller:
-    build: .
+    build:
+      context: .
+      network: host
     container_name: garden-controller
     environment:
       CONFIG_FILE: /run/secrets/config.json
