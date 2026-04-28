@@ -1,7 +1,7 @@
 import json
-import uuid
 import time
 import threading
+import uuid
 
 import paho.mqtt.client as mqtt
 from RaspberryPi import RaspberryPi
@@ -156,18 +156,20 @@ def create_mqtt_client():
 
 
 def run_mqtt():
+    client = create_mqtt_client()
+    while True:
+        try:
+            print(f"Connecting to broker {config.MQTT_BROKER}:{config.MQTT_PORT}...")
+            client.connect(config.MQTT_BROKER, config.MQTT_PORT, 60)
+            break
+        except Exception as e:
+            print(f"MQTT connect failed: {e} — retrying in 5s")
+            time.sleep(5)
     try:
-        client = create_mqtt_client()
-        print(f"Connecting to broker {config.MQTT_BROKER} on port {config.MQTT_PORT}")
-        client.connect(config.MQTT_BROKER, config.MQTT_PORT, 60)
         client.loop_forever()
-        return client
-
     except KeyboardInterrupt:
         print("Shutting down gracefully...")
         rp.cleanup()
     except Exception as e:
         print(f"Error in MQTT client: {e}")
         rp.cleanup()
-    finally:
-        pass
