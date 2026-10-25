@@ -1,7 +1,6 @@
 import json
 import time
 import threading
-import uuid
 
 import paho.mqtt.client as mqtt
 from RaspberryPi import RaspberryPi
