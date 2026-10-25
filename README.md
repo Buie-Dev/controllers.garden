@@ -20,7 +20,7 @@ Raspberry Pi Zero 2W MQTT subscriber that listens for irrigation instructions an
 | 1    | 2         |
 | 2    | 3         |
 | 3    | 4         |
-| 4    | 17        |
+| 4    | 22        |
 | 5    | 27        |
 | 6    | 18        |
 | 7    | 10        |
